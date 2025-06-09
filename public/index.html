@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Relaquent | Developer</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+
+      .shine-hover {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.shine-hover:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.shine-hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  transform: skewX(-20deg);
+  filter: blur(1px);
+  opacity: 0.7;
+  z-index: 1;
+  transition: left 0.8s ease;
+  pointer-events: none;
+}
+
+.shine-hover:hover::before {
+  left: 125%;
+}
+
+.shine-hover .project-content {
+  position: relative;
+  z-index: 2;
+}
+
+
+  #cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,255,255,0.6) 0%, rgba(109,0,255,0.4) 40%, transparent 80%);
+  filter: drop-shadow(0 0 6px rgba(0,255,255,0.8)) drop-shadow(0 0 20px rgba(109,0,255,0.7));
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+  z-index: 9999;
+}
+
+
+
+
+      /* Shine efekti */
+    .shine {
+      background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.5) 50%,
+        rgba(255,255,255,0) 100%
+      );
+      transform: skewX(-20deg) translateX(-150%);
+    }
+
+    .group:hover .shine {
+  animation: shine-slide 0.8s forwards;
+    }
+
+    @keyframes rgb-border {
+  0% {
+    border-color: #ff0000;
+    box-shadow: 0 0 10px #ff0000;
+  }
+  33% {
+    border-color: #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+  }
+  66% {
+    border-color: #0000ff;
+    box-shadow: 0 0 10px #0000ff;
+  }
+  100% {
+    border-color: #ff0000;
+    box-shadow: 0 0 10px #ff0000;
+  }
+}
+
+.project-rgb-border {
+  border: 2px solid;
+  animation: rgb-border 6s linear infinite;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px currentColor;
+  transition: box-shadow 0.3s ease;
+}
+
+
+
+    .animated-text {
+      display: flex;
+      gap: 0.15em;
+      font-size: 4rem;
+      font-weight: 800;
+      user-select: none;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .animated-text span {
+      color: transparent;
+      background: linear-gradient(135deg, #0fffc1, #00aaff);
+      background-clip: text;
+      -webkit-background-clip: text;
+      animation: neon-fade 3s ease-in-out infinite, wave 2s infinite ease-in-out;
+      animation-delay: calc(var(--i) * 0.1s);
+      opacity: 0;
+      transform: translateY(30px);
+      animation-fill-mode: forwards;
+    }
+
+    .rgb-button {
+  position: relative;
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background: linear-gradient(270deg, #00fff7, #00d0ff, #00aaff, #00fff7);
+  background-size: 600% 600%;
+  animation: rgb-fill 6s ease infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  text-shadow: 0 0 6px rgba(255,255,255,0.5);
+}
+
+.rgb-button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(0,255,255,0.6), 0 0 50px rgba(0,255,255,0.3);
+}
+
+
+.glow-letter {
+  animation: letterGlow 2s ease-in-out infinite alternate;
+  animation-delay: calc(var(--i) * 0.1s);
+  transition: transform 0.3s ease, color 0.3s;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.3); /* daha az parlak glow */
+}
+
+.glow-letter:hover {
+  transform: scale(1.2);
+  color: #66fcf1;
+  text-shadow: 0 0 12px rgba(102, 252, 241, 0.6); /* daha yumuşak */
+}
+
+@keyframes letterGlow {
+  0% { text-shadow: 0 0 5px rgba(102, 252, 241, 0.2); transform: translateY(0); }
+  100% { text-shadow: 0 0 12px rgba(102, 252, 241, 0.4); transform: translateY(-4px); }
+}
+
+.rgb-button {
+  position: relative;
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(135deg, #112d4e, #3f72af);
+  border-radius: 9999px;
+  text-align: center;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s;
+  z-index: 1;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.15);
+}
+
+.rgb-button::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(270deg, #0ff, #08f, #0ff);
+  background-size: 400% 400%;
+  animation: rgbWave 6s linear infinite;
+  z-index: -1;
+  border-radius: inherit;
+  filter: blur(4px); /* daha yumuşak blur */
+  opacity: 0.3;
+}
+
+.rgb-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(102, 252, 241, 0.3);
+}
+
+@keyframes rgbWave {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* RGB wave animation */
+@keyframes rgb-fill {
+  0%   { background-position: 100% 50%; }
+  50%  { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+
+    @keyframes neon-fade {
+      0% {
+        opacity: 0;
+        text-shadow: none;
+      }
+      50% {
+        opacity: 1;
+        text-shadow:
+          0 0 5px #0fffc1,
+          0 0 10px #0fffc1,
+          0 0 20px #00aaff;
+      }
+      100% {
+        opacity: 1;
+        text-shadow:
+          0 0 10px #00aaff,
+          0 0 20px #00aaff,
+          0 0 30px #0fffc1;
+      }
+    }
+
+  @keyframes animated-bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animated-bg {
+  background: linear-gradient(270deg, #00ffff, #0000ff, #ff00ff);
+  background-size: 600% 600%;
+  animation: animated-bg 12s ease infinite;
+}
+ 
+
+    /* Metin parıltısı */
+  @keyframes textGlow {
+    0%, 100% {
+      text-shadow: 0 0 10px #0ff, 0 0 20px #f0f, 0 0 30px #00f;
+    }
+    50% {
+      text-shadow: 0 0 20px #0ff, 0 0 30px #f0f, 0 0 40px #00f;
+    }
+  }
+  .animate-text-glow {
+    animation: textGlow 4s ease-in-out infinite;
+  }
+
+  /* Yazma efekti */
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 18ch }
+  }
+
+  .rgb-button {
+  position: relative;
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  background: linear-gradient(270deg, #ff0080, #7928ca, #2afadf, #00ffff, #ff0080);
+  background-size: 600% 600%;
+  animation: rgb-fill 8s ease infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  text-shadow: 0 0 5px rgba(255,255,255,0.4);
+}
+
+.rgb-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0,255,255,0.4), 0 0 40px rgba(0,255,255,0.2);
+}
+
+/* RGB hareket animasyonu */
+@keyframes rgb-fill {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
+  @keyframes blink {
+    50% { border-color: transparent }
+  }
+
+  .animate-typing {
+    width: 0;
+    animation: typing 3s steps(18, end) forwards, blink 0.75s step-end infinite;
+  }
+
+      @keyframes textGlow {
+    0%, 100% {
+      text-shadow: 0 0 15px #0ff, 0 0 25px #f0f, 0 0 35px #00f;
+    }
+    50% {
+      text-shadow: 0 0 25px #0ff, 0 0 35px #f0f, 0 0 45px #00f;
+    }
+  }
+
+  .animate-text-glow {
+    animation: textGlow 4s ease-in-out infinite;
+  }
+
+  .animate-blink {
+    animation: blink 1s steps(2, start) infinite;
+  }
+
+  .rgb-button-secondary {
+  position: relative;
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background: linear-gradient(270deg, #00fff7, #00d0ff, #00aaff, #00fff7);
+  background-size: 600% 600%;
+  animation: rgb-fill-alt 6s ease infinite;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  text-shadow: 0 0 4px rgba(255,255,255,0.4);
+}
+
+.rgb-button-secondary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0,255,255,0.4), 0 0 40px rgba(0,255,255,0.2);
+}
+
+/* Animasyon farklılık yaratması için */
+@keyframes rgb-fill-alt {
+  0% { background-position: 100% 50%; }
+  50% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+    .rgb-wave-button {
+  position: relative;
+  display: inline-block;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  border-radius: 9999px;
+  background-color: #0f172a; /* tailwind's gray-950 */
+  overflow: hidden;
+  z-index: 0;
+  border: 2px solid transparent;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.rgb-wave-button::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(120deg, red, orange, yellow, green, cyan, blue, violet, red);
+  animation: move-rgb 4s linear infinite;
+  z-index: -2;
+}
+
+.rgb-wave-button::after {
+  content: "";
+  position: absolute;
+  top: 2px; left: 2px; right: 2px; bottom: 2px;
+  background: #0f172a;
+  border-radius: 9999px;
+  z-index: -1;
+}
+
+.rgb-wave-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0,255,255,0.4), 0 0 40px rgba(0,255,255,0.2);
+}
+
+@keyframes move-rgb {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+    @keyframes wave {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .animated-text span:hover {
+      animation: pulse 1s infinite;
+      cursor: pointer;
+    }
+
+    /* Hero Özel Efektler */
+
+@keyframes textGlow {
+  0%, 100% {
+    text-shadow: 0 0 15px #0ff, 0 0 25px #f0f, 0 0 35px #00f;
+  }
+  50% {
+    text-shadow: 0 0 25px #0ff, 0 0 35px #f0f, 0 0 45px #00f;
+  }
+}
+
+.animate-text-glow {
+  animation: textGlow 4s ease-in-out infinite;
+}
+
+.animate-blink {
+  animation: blink 1s steps(2, start) infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+
+    @keyframes pulse {
+      0%, 100% {
+        text-shadow: 0 0 10px #0fffc1, 0 0 30px #00aaff;
+      }
+      50% {
+        text-shadow: 0 0 20px #00e0ff, 0 0 40px #00c3ff;
+      }
+    }
+
+      @keyframes text-glow {
+    0%, 100% {
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.5);
+    }
+    50% {
+      text-shadow: 0 0 20px rgba(0, 255, 255, 1), 0 0 30px rgba(0, 255, 255, 0.8);
+    }
+  }
+
+  .animate-text-glow {
+    animation: text-glow 3s ease-in-out infinite;
+  }
+
+  .animated-text span {
+    display: inline-block;
+    animation: jump 1.5s ease-in-out infinite;
+    animation-delay: calc(0.1s * var(--i));
+  }
+
+  @keyframes jump {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+    .glow-letter {
+    font-size: 3rem;
+    font-weight: 800;
+    display: inline-block;
+    background: linear-gradient(90deg, #0ff, #38bdf8, #60a5fa);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: floatLetter 2.5s ease-in-out infinite, gradientFlow 6s ease infinite;
+    animation-delay: calc(var(--i) * 0.1s);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.6), 0 0 20px rgba(56, 189, 248, 0.4);
+    transition: transform 0.3s, text-shadow 0.3s;
+  }
+
+  .glow-letter:hover {
+    transform: scale(1.3) rotate(5deg);
+    text-shadow: 0 0 20px rgba(56, 189, 248, 1), 0 0 30px rgba(56, 189, 248, 0.8);
+  }
+
+  @keyframes floatLetter {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+    .view-button {
+    display: inline-block;
+    padding: 0.75rem 2.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: white;
+    background: linear-gradient(90deg, #06b6d4, #3b82f6);
+    border-radius: 9999px;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .view-button:hover {
+    transform: scale(1.08) rotateX(5deg);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.9), 0 0 40px rgba(59, 130, 246, 0.6);
+  }
+
+  .view-button .button-text {
+    position: relative;
+    z-index: 10;
+  }
+
+  .view-button .button-glow {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+    background-size: 1400% 1400%;
+    animation: rgb-flow 6s linear infinite;
+    filter: blur(10px);
+    opacity: 0.4;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  @keyframes rgb-flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .view-button::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 9999px;
+    background: linear-gradient(270deg, #0ff, #3b82f6, #06b6d4);
+    animation: pulse-border 4s linear infinite;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
+  @keyframes pulse-border {
+    0%, 100% { filter: hue-rotate(0deg); }
+    50% { filter: hue-rotate(180deg); }
+  }
+  
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @media (min-width: 640px) {
+    .glow-letter {
+      font-size: 4rem;
+    }
+  }
+
+      /* RELAQUENT renk geçişli animasyon */
+  .relaquent-title {
+    background: linear-gradient(270deg, #22d3ee, #3b82f6, #8b5cf6);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientMotion 6s ease infinite;
+  }
+
+  @keyframes gradientMotion {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .relaquent-title:hover {
+    text-shadow: 0 0 15px rgba(59, 130, 246, 0.5), 0 0 30px rgba(34, 211, 238, 0.4);
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Gradient renk geçişli ve dalgalı yazı */
+  .relaquent-title {
+    background: linear-gradient(270deg, #22d3ee, #3b82f6, #8b5cf6);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 6s ease infinite, floatUpDown 3s ease-in-out infinite;
+  }
+
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes floatUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .relaquent-title:hover {
+    text-shadow: 0 0 15px rgba(59, 130, 246, 0.5), 0 0 30px rgba(34, 211, 238, 0.3);
+  }
+
+    .animated-letter {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(270deg, #22d3ee, #3b82f6, #6366f1);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: floatLetter 2s ease-in-out infinite, gradientFlow 6s ease infinite;
+    animation-delay: calc(var(--i) * 0.1s);
+    display: inline-block;
+  }
+
+  @keyframes floatLetter {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  h1 {
+    line-height: 1;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @media (min-width: 640px) {
+    .animated-letter {
+      font-size: 4rem;
+    }
+  }
+
+  @keyframes rgb-glow {
+    0% {
+      border-color: #ff0000;
+      box-shadow: 0 0 20px #ff0000;
+    }
+    33% {
+      border-color: #00ff00;
+      box-shadow: 0 0 20px #00ff00;
+    }
+    66% {
+      border-color: #0000ff;
+      box-shadow: 0 0 20px #0000ff;
+    }
+    100% {
+      border-color: #ff0000;
+      box-shadow: 0 0 20px #ff0000;
+    }
+  }
+
+  .animate-rgb-glow {
+    animation: rgb-glow 6s linear infinite;
+    border-radius: 1rem;
+  }
+
+  </style>
+</head>
+
+<!-- Hero bölümünden hemen önce eklenebilir canvas -->
+<canvas id="stars" class="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.net.min.js"></script>
+<script>
+  VANTA.NET({
+    el: "#hero",
+    mouseControls: true,
+    touchControls: true,
+    color: 0x00ffff,
+    backgroundColor: 0x0a0a0a
+  });
+</script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    emailjs.init("MduWl-cJeX-s4FwjK"); // Kendi public key’in
+
+    const form = document.getElementById("contact-form");
+    const cooldownKey = "contactCooldown";
+    const cooldownHours = 24;
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const now = new Date().getTime();
+      const lastSent = localStorage.getItem(cooldownKey);
+
+      if (lastSent && now - parseInt(lastSent) < cooldownHours * 60 * 60 * 1000) {
+        const remaining = Math.ceil((cooldownHours * 60 * 60 * 1000 - (now - lastSent)) / (1000 * 60));
+        alert(`You've already sent a message. Please wait ${remaining} more minute(s).`);
+        return;
+      }
+
+      // Eğer cooldown yoksa veya süresi dolmuşsa Email gönder
+      emailjs.sendForm("service_odzfsr5", "template_lbzuock", this)
+        .then(() => {
+          localStorage.setItem(cooldownKey, now.toString()); // Cooldown başlat
+          alert("Message successfully sent! 🚀 You can send another after 24 hours.");
+          this.reset();
+        }, (error) => {
+          alert("Error: " + JSON.stringify(error));
+        });
+    });
+  });
+</script>
+
+
+<script>
+  const typewriter = document.getElementById("typewriter");
+  const phrases = ["Developer.", "Designer.", "Visionary."];
+  let i = 0, j = 0;
+  let currentPhrase = [];
+  let isDeleting = false;
+  let isEnd = false;
+
+  function loop() {
+    typewriter.innerHTML = currentPhrase.join("");
+
+    if (i < phrases.length) {
+      if (!isDeleting && j <= phrases[i].length) {
+        currentPhrase.push(phrases[i][j]);
+        j++;
+      }
+
+      if (isDeleting && j <= phrases[i].length) {
+        currentPhrase.pop();
+        j--;
+      }
+
+      if (j == phrases[i].length) {
+        isEnd = true;
+        isDeleting = true;
+      }
+
+      if (isDeleting && j === 0) {
+        currentPhrase = [];
+        isDeleting = false;
+        i++;
+        if (i === phrases.length) i = 0;
+      }
+    }
+
+    const speed = isEnd ? 1000 : isDeleting ? 40 : 100;
+    isEnd = false;
+    setTimeout(loop, speed);
+  }
+
+  document.addEventListener("DOMContentLoaded", loop);
+</script>
+
+<!-- Glow efekti için div -->
+<div id="glow" class="pointer-events-none fixed w-24 h-24 rounded-full bg-cyan-400 opacity-30 blur-3xl z-0"></div>
+
+
+<body class="bg-gradient-to-br from-gray-900 via-black to-gray-900 text-white">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>AOS.init();</script>
+<div id="cursor-glow"></div>
+<div class="relative group bg-gray-900 rounded-2xl overflow-hidden shadow-xl border border-gray-800 transition-transform duration-300 hover:scale-105 hover:border-cyan-400 project-rgb-border" data-aos="fade-up" data-aos-delay="0"></div>
+
+<!-- Cursor Glow Script -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const glow = document.getElementById("cursor-glow");
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let currentX = mouseX;
+    let currentY = mouseY;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    function animate() {
+      currentX += (mouseX - currentX) * 0.2;
+      currentY += (mouseY - currentY) * 0.2;
+      glow.style.transform = `translate(${currentX}px, ${currentY}px) translate(-50%, -50%)`;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  });
+</script>
+
+
+<!-- ... diğer HTML ... -->
+
+<!-- Body bitmeden önce, en sona koy -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    emailjs.init("MduWl-cJeX-s4FwjK"); // kendi public key’in
+
+    const form = document.getElementById("contact-form");
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      emailjs.sendForm("service_odzfsr5", "template_lbzuock", this)
+        .then(() => {
+          alert("Message successfully sent! 🚀");
+          this.reset();
+        }, (error) => {
+          alert("Error: " + JSON.stringify(error));
+        });
+    });
+  });
+</script>
+
+<!-- Hero -->
+<section id="hero" class="relative h-screen flex flex-col items-center justify-center text-center px-4 overflow-hidden z-0">
+  <!-- WebGL (Vanta.NET) efekt buraya uygulanacak -->
+
+  <!-- Relaquent harf harf animasyonlu -->
+  <h1 class="flex gap-1 sm:gap-2 z-10 group text-6xl sm:text-7xl font-extrabold text-white">
+    <span class="glow-letter" style="--i:0">R</span>
+    <span class="glow-letter" style="--i:1">e</span>
+    <span class="glow-letter" style="--i:2">l</span>
+    <span class="glow-letter" style="--i:3">a</span>
+    <span class="glow-letter" style="--i:4">q</span>
+    <span class="glow-letter" style="--i:5">u</span>
+    <span class="glow-letter" style="--i:6">e</span>
+    <span class="glow-letter" style="--i:7">n</span>
+    <span class="glow-letter" style="--i:8">t</span>
+  </h1>
+
+  <!-- Typewriter alt yazı -->
+  <p id="typewriter" class="mt-6 text-cyan-200 text-2xl sm:text-3xl font-medium min-h-[2.5rem] z-10"></p>
+
+  <!-- Butonlar -->
+  <div class="flex flex-col sm:flex-row gap-4 mt-10 z-10">
+    <a href="#projects" class="rgb-button">View My Work</a>
+    <a href="#contact" class="rgb-button">Contact Me</a>
+  </div>
+</section>
+
+
+ <section id="projects" class="py-24 bg-gray-950 relative z-10 overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-purple-900 via-transparent to-blue-900 opacity-10 pointer-events-none animate-pulse"></div>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <h2 class="text-5xl font-extrabold mb-20 text-center text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-blue-600 bg-clip-text tracking-tight" data-aos="fade-down">
+      🚀 My Projects
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+      <!-- Project 1: Chenex AI -->
+      <div class="relative group bg-gray-900 rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 project-rgb-border shine-hover" data-aos="fade-up" data-aos-delay="0">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-blue-700/10 group-hover:blur-md group-hover:opacity-80 transition duration-500"></div>
+        <div class="p-6 relative z-10 project-content">
+          <h3 class="text-3xl font-bold text-transparent bg-gradient-to-r from-purple-500 via-blue-400 to-cyan-400 bg-clip-text mb-4 group-hover:underline decoration-wavy">🔮 Chenex AI</h3>
+          <p class="text-gray-300">AI-powered financial assistant with real-time predictions for students and analysts. Smart, insightful, efficient.</p>
+        </div>
+      </div>
+
+      <!-- Project 2: Rumonium API -->
+      <div class="relative group bg-gray-900 rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 project-rgb-border shine-hover" data-aos="fade-up" data-aos-delay="100">
+        <div class="absolute inset-0 bg-gradient-to-br from-green-400/10 to-teal-400/10 group-hover:blur-md group-hover:opacity-80 transition duration-500"></div>
+        <div class="p-6 relative z-10 project-content">
+          <h3 class="text-3xl font-bold text-transparent bg-gradient-to-r from-green-400 to-teal-500 bg-clip-text mb-4 group-hover:underline decoration-wavy">⚙️ Rumonium API</h3>
+          <p class="text-gray-300">A plugin that allows you to transfer real-time cryptocurrency exchange data to your own Minecraft server.</p>
+        </div>
+      </div>
+
+      <!-- Project 3: Novaxis Music -->
+      <div class="relative group bg-gray-900 rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 project-rgb-border shine-hover" data-aos="fade-up" data-aos-delay="200">
+        <div class="absolute inset-0 bg-gradient-to-br from-pink-400/10 to-fuchsia-400/10 group-hover:blur-md group-hover:opacity-80 transition duration-500"></div>
+        <div class="p-6 relative z-10 project-content">
+          <h3 class="text-3xl font-bold text-transparent bg-gradient-to-r from-pink-400 to-fuchsia-600 bg-clip-text mb-4 group-hover:underline decoration-wavy">🎧 Novaxis Music</h3>
+          <p class="text-gray-300">Synthwave, phonk & lofi project blending retro vibes with modern sound engineering. Stream-ready audio!</p>
+        </div>
+      </div>
+
+      <!-- Project 4: ReLang -->
+      <div class="relative group bg-gray-900 rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 project-rgb-border shine-hover" data-aos="fade-up" data-aos-delay="300">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-400/10 to-indigo-400/10 group-hover:blur-md group-hover:opacity-80 transition duration-500"></div>
+        <div class="p-6 relative z-10 project-content">
+          <h3 class="text-3xl font-bold text-transparent bg-gradient-to-r from-purple-400 to-indigo-500 bg-clip-text mb-4 group-hover:underline decoration-wavy">💬 ReLang</h3>
+          <p class="text-gray-300">Translate anything you want into many different languages within the game on your own Minecraft server without needing any translations. This is possible with ReLang.</p>
+        </div>
+      </div>
+
+      <!-- Project 5: Soon1 -->
+      <div class="relative group bg-gray-900 rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 project-rgb-border shine-hover" data-aos="fade-up" data-aos-delay="400">
+        <div class="absolute inset-0 bg-gradient-to-br from-yellow-300/10 to-orange-400/10 group-hover:blur-md group-hover:opacity-80 transition duration-500"></div>
+        <div class="p-6 relative z-10 project-content">
+          <h3 class="text-3xl font-bold text-transparent bg-gradient-to-r from-yellow-300 to-orange-500 bg-clip-text mb-4 group-hover:underline decoration-wavy">⚙️ Soon!</h3>
+          <p class="text-gray-300">It's still a mystery...</p>
+        </div>
+      </div>
+
+      <!-- Project 6: Soon2 -->
+      <div class="relative group bg-gray-900 rounded-2xl overflow-hidden shadow-xl transition-transform duration-300 hover:scale-105 project-rgb-border shine-hover" data-aos="fade-up" data-aos-delay="500">
+        <div class="absolute inset-0 bg-gradient-to-br from-red-400/10 to-pink-500/10 group-hover:blur-md group-hover:opacity-80 transition duration-500"></div>
+        <div class="p-6 relative z-10 project-content">
+          <h3 class="text-3xl font-bold text-transparent bg-gradient-to-r from-red-400 to-pink-500 bg-clip-text mb-4 group-hover:underline decoration-wavy">🌐 Soon!</h3>
+          <p class="text-gray-300">It's still a mystery...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="relative py-24 bg-gray-950 overflow-hidden">
+  <!-- Background glow -->
+  <div class="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-transparent to-purple-900/10 pointer-events-none z-0 animate-pulse"></div>
+
+  <!-- Container -->
+  <div class="max-w-5xl mx-auto px-6 relative z-10 project-rgb-border p-10" data-aos="fade-up">
+    <h2 class="text-5xl font-extrabold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 tracking-tight">
+      About Me
+    </h2>
+    <p class="text-lg sm:text-xl text-gray-300 leading-relaxed text-center">
+      I'm a <span class="text-cyan-400 font-semibold">Software & Game Developer</span> and <span class="text-blue-400 font-semibold">Player</span> My goal is to gain experience on this path I have embarked upon and to progress towards becoming a better developer.
+    </p>
+    <p class="text-md sm:text-lg text-gray-400 mt-6 text-center max-w-3xl mx-auto">
+      I'm currently working on a few Minecraft plugins and an indie game. 
+    </p>
+  </div>
+</section>
+
+
+<!-- Contact -->
+<section id="contact" class="py-24 bg-gray-950 relative z-10">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-5xl font-bold text-center text-cyan-400 mb-10" data-aos="fade-up">Contact Me</h2>
+
+    <!-- RGB Border Wrapper -->
+    <div class="project-rgb-border p-[2px]">
+      <form id="contact-form" class="bg-gray-900 p-10 rounded-xl shadow-xl space-y-6" data-aos="fade-up" data-aos-delay="100">
+        <input type="text" name="name" placeholder="Your Name"
+          class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-600 outline-none transition duration-200" />
+        <input type="email" name="email" placeholder="Your Email"
+          class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-600 outline-none transition duration-200" />
+        <textarea name="message" placeholder="Your Message"
+          class="w-full p-3 rounded bg-gray-800 text-white border border-gray-700 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-600 outline-none transition duration-200 h-32 resize-none"></textarea>
+        <button type="submit"
+          class="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-blue-600 hover:to-cyan-500 transition-all duration-300 ease-in-out px-6 py-3 rounded w-full text-lg font-semibold text-white shadow-lg hover:scale-105 focus:outline-none focus:ring-4 focus:ring-cyan-500/50">
+          🚀 Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Footer -->
+  <footer class="bg-black py-8 text-center text-gray-500">
+    <p>&copy; 2025 Relaquent. All rights reserved.</p>
+    <div class="mt-4 space-x-4">
+      <a href="https://github.com/relaquent" target="_blank" class="hover:text-white"><i class="fab fa-github fa-lg"></i></a>
+      <a href="https://www.youtube.com/@relaquentt" target="_blank" class="hover:text-white"><i class="fab fa-youtube fa-lg"></i></a>
+      <a href="https://relaquent.com/discord" target="_blank" class="hover:text-white"><i class="fab fa-discord fa-lg"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    AOS.init();
+  </script>
+  <!-- THREE.js ve Vanta.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+
+<!-- Vanta.js için gerekli scriptler -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+
+<script>
+VANTA.NET({
+  el: "#hero",
+  mouseControls: true,
+  touchControls: true,
+  gyroControls: false,
+  minHeight: 200.00,
+  minWidth: 200.00,
+  scale: 1.0,
+  scaleMobile: 1.0,
+  color: 0x44d7b6,             // Yumuşak turkuaz
+  backgroundColor: 0x0a0a0a,  // Koyu gri-siyah
+  points: 8.0,                // Daha az nokta
+  maxDistance: 20.0,
+  spacing: 20.0
+});
+</script>
+
+</body>
+</html>
